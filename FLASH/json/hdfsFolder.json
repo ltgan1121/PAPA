@@ -1,0 +1,5 @@
+{
+	"success": true,
+	"message": "if false return some error message",
+	"hdfsFolder": ["userName/abc","userName/d","userName/sf"]
+}

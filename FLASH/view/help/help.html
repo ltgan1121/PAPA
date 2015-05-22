@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1">
+	<title>help-spark-ide</title>
+    <link type="text/css" rel="stylesheet" href="../../css/reset.css?v=1.0">
+    <link type="text/css" rel="stylesheet" href="../../css/common.css?v=1.0">
+    <style type="text/css">
+        .tal { text-align: left; }
+        .help-page { width: 960px; margin: 0 auto; padding-top:2em  }
+        .page-title { line-height: 36px; font-size: 2em; margin-bottom: 1em; }
+        .help-section { margin-bottom: 2em }
+        .help-section h2 { margin-bottom: 0.5em }
+        .help-section ul { padding-bottom: 2em }
+        .help-section ul li { margin-bottom: 0.75em }
+        .help-page .important { color: #fff; background: #f00; padding: 0 0.5em; }
+    </style>
+</head>
+<body>
+<div data-role="help" class="help-page">
+    <h1 class="page-title tac">如何使用web版spark-ide</h1>
+    <div class="help-section">
+        <p class="tips-msg tal">web版spark-ide为用户提供图形化操作界面，是一个在浏览器中就能执行spark任务的便捷工具，它主要具有一下功能：</p>
+    </div>
+    <div class="help-section">
+        <h2>一、新建流程</h2>
+        <ul>
+            <li>
+                1、点击 [新建流程] 鼠标移至应用组件面板会显示各个组件的描述，按下鼠标将任意组件拖放至右侧的流程绘图区域即可创建一个流程节点
+            </li>
+            <li>
+                2、双击流程节点即可为该流程节点配置属性，属性配置完成后请点击确定，<span class="important">点击取消或关闭按钮，您修改或配置属性在保存流程时将不会生效</span>
+            </li>
+            <li>
+                3、创建下一流程节点，编辑配置属性后保存，鼠标移至流程节点会显示一个橙色的圆点，按下鼠标拖拽至另一流程节点即可创建节点流向连线，点击流向连线即可删除该连接线，选中流程节点按下del键即可删除流程节点
+            </li>
+        </ul>
+        <h2>二、保存流程</h2>
+        <ul>
+            <li>
+                1、流程创建完成后，点击 [保存流程] 输入一个流程名称，点击 [保存] 将整个流程的数据提交至服务器，您会看到一个流程保存成功的提示
+            </li>
+        </ul>
+        <h2>三、执行流程，查看报告</h2>
+        <ul>
+            <li>
+                1、一个流程经过数据源、数据分析、数据存储之后会流向一个最终节点，该节点是一个流程报告节点，有可能是数据表格展示节点(table-display)、统计图展示节点(barplot-display)、树形结构展示节点(tree-display)
+            </li>
+            <li>
+                2、双击这些节点，点击按钮执行即可查看到服务器返回数据报告，如果您还没有保存流程，请先保存
+            </li>
+        </ul>
+        <h2>四、创建流程副本</h2>
+        <ul>
+            <li>
+                1、如果您想要在一个既有流程的基础上添加更多的流程节点或者属性，您可以点击 [存为副本] 将该流程存为副本然后进行其他操作，这是一个帮助您提高工作效率的功能
+            </li>
+        </ul>
+        <h2>五、打开流程</h2>
+        <ul>
+            <li>
+                1、在您保存流程之后，流程数据将会提交至服务器，这时您可以点击 [打开流程] 在流程列表里选择任意一个流程在当前视图进行切换，您可以对已保存的流程进行修改和更新，如果您对流程进行了修改，请注意保存
+            </li>
+        </ul>
+        <h2>六、流程管理</h2>
+        <ul>
+            <li>1、点击 [打开流程] 在流程列表面板的输入框内输入关键字可以进行精确索引</li>
+            <li>2、点击 [刷新] 可以刷新流程列表，</li>
+            <li>3、鼠标经过流程列表时，右侧会显示删除按钮，点击 [删除] 可以删除该流程，请注意删除操作无法撤销</li>
+            <li>4、如果您需要进行批量操作，请点击右上角的 [管理] 进入管理模式进行批量操作，管理模式无法切换流程</li>
+            <li>5、点击 [退出] 即可回到正常模式</li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

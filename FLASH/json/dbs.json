@@ -1,0 +1,9 @@
+{
+	"success": true,
+	"total": "100",
+	"message": "if false return some error message",
+	"dbs": [
+		{ "text": "database1", "value": "database1" },
+		{ "text": "database2", "value": "database2" }
+	]
+}

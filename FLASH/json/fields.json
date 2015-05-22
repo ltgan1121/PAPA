@@ -1,0 +1,9 @@
+{
+	"success": true,
+	"total": "100",
+	"message": "if false return some error message",
+	"fields": [
+		{ "text": "tables1", "value": "tables1" },
+		{ "text": "tables2", "value": "tables2" }
+	]
+}

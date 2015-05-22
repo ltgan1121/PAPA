@@ -1,0 +1,44 @@
+{
+    "nodes": [
+        {
+            "nodeId": "jsPlumb-4C74C557-EB45-4459-BA0F-C7C4B8E8C617",
+            "iconCls": "fa-pie-chart",
+            "property": {},
+            "nodeType": "pie-display",
+            "input": "Accounting",
+            "output": "Pie",
+            "indegree": 1,
+            "cmpWindow": true,
+            "parentType": "grid",
+            "nodePosTop": 252,
+            "nodePosLeft": 287
+        },
+        {
+            "nodeId": "jsPlumb-318284B3-C2EF-428C-910A-FBA139FAA99B",
+            "iconCls": "fa-pie-chart",
+            "property": {
+                "selectColKeys": "0,1",
+                "selectColValues": "2,3"
+            },
+            "nodeType": "select-accounting",
+            "input": "Data",
+            "output": "Accounting",
+            "indegree": 1,
+            "cmpWindow": true,
+            "parentType": "pre-process",
+            "nodePosTop": 153,
+            "nodePosLeft": 89
+        }
+    ],
+    "processId": "PROCESS-2A5B832C-E030-45F7-A766-3B1630B0DD4E",
+    "processName": "a",
+    "connections": [
+        {
+            "targetId": "jsPlumb-4C74C557-EB45-4459-BA0F-C7C4B8E8C617",
+            "sourceId": "jsPlumb-318284B3-C2EF-428C-910A-FBA139FAA99B",
+            "connectorId": "con_6",
+            "connectorName": "con_6",
+            "connectorType": "data"
+        }
+    ]
+}
