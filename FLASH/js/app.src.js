@@ -172,6 +172,36 @@
                         if(callback)callback();
                     }
                 });
+            }, 
+            checkHdfsFolder: function(folder,callback){ // Add by Ganlt 2015.05.22
+
+                var errorHtml;
+
+                 $.ajax({
+                    //url: 'json/checkHdfsFolder.json',
+                    url: 'hive/checkHdfsFolder?folder=' + folder,
+                    dataType: 'json',
+                    cache: false,
+                    success: function (response) {
+                        if(response && response.success)
+                        {
+                            if(callback) callback();
+                        }
+                        else if(response && response.message)
+                        {
+                            if(!$("#hdfs_path-error"))
+                            {
+                                errorHtml = '<span id="hdfs_path-error" class="form-error-tips" style="display: inline;">'+response.message+'</span>';
+                                $('[name="hdfs_path"]').after(errorHtml);
+                            }
+                            else if($("#hdfs_path-error").html().length == 0)
+                            {
+                                $("#hdfs_path-error").html(response.message).removeClass('valid');
+                            }
+
+                        }
+                    },
+                });
             },
             getTables: function (opts) {
                 opts = opts || {};
@@ -1011,22 +1041,13 @@
 		                    $(".hdfs-path-final").val($(".hdfs-path-personal").val());
 	                    });
 	                    
-	                    $(".hdfs-path-define").on("change",function(){
-		                    $(".hdfs-path-final").val($(".hdfs-path-define").val());
-	                    });
-	                    
 	                    var hdfs_type = $('[name="hdfs_type"]').val(), hdfs_path = $('[name="hdfs_path"]').val();
-	                    
-	                    
-	                    if(hdfs_type && hdfs_type == 1)
+
+	                    if(hdfs_type  && hdfs_type == 0)
 	                    {
-	                         $('input[name="hdfs-folder"][value="1"]').click();
-		                     $(".hdfs-path-define").val(hdfs_path);
-	                    }
-	                    else if(hdfs_type)
-	                    {
+	                    	 $('input[name="hdfs-folder"][value="0"]').click();
 		                    $('.hdfs-path-personal option[value="'+hdfs_path+'"]').attr("selected",true);
-		                    //$(".hdfs-path-personal").val(hdfs_path);
+		                    $(".hdfs-path-final").val($(".hdfs-path-personal").val());
 	                    }
 	                };
 	                
@@ -1053,8 +1074,19 @@
                         }
                     });
                     
-	                
+
+                    $(".hdfs-path-define").on("change",function(){
+	                    $(".hdfs-path-final").val($(".hdfs-path-define").val());
+                    });
                     
+                    var hdfs_type = $('[name="hdfs_type"]').val(), hdfs_path = $('[name="hdfs_path"]').val();
+                    
+                    if(hdfs_type && hdfs_type == 1)
+                    {
+                         $('input[name="hdfs-folder"][value="1"]').click();
+	                     $(".hdfs-path-define").val(hdfs_path);
+	                     $(".hdfs-path-final").val($(".hdfs-path-define").val());
+                    }
                 }
                             
             },
@@ -1224,24 +1256,37 @@
                     len = $formElements.size(),
                     cmpProp = {};
 
+                var callback = function(){
+                    for (; i < len; i++) {
+                        if ($formElements[i].name) {
+                            cmpProp[$formElements[i].name] = $formElements[i].value;
+                        };
+                    }
+                    $cmpWindow.data('belong-to').data('prop',cmpProp);
+                    $cmpWindow.removeClass('visible');
+                    process.$mask.removeClass('visible');
+
+                    process.twinklingNode($cmpWindow.data('belong-to'),false);
+                };
+
                 if ($form.size()) {
                     $form.validate(app.getFormValidateOpts($form));
                     if (!$form.valid()) {
                         $form.find(process.foucsElements).filter(process.enabledErrorFirst).focus();
                         return
                     }
-                }
-                for (; i < len; i++) {
-                    if ($formElements[i].name) {
-                        cmpProp[$formElements[i].name] = $formElements[i].value;
-                    };
-                    // $formElements[i].value = '';
-                }
-                $cmpWindow.data('belong-to').data('prop',cmpProp);
-                $cmpWindow.removeClass('visible');
-                process.$mask.removeClass('visible');
 
-                process.twinklingNode($cmpWindow.data('belong-to'),false);
+                    // 检测自定义hdfs路径是否存在  Add by Ganlt 2015.05.22
+                    if($('[name="hdfs_type"]').val() == '1' && $cmpWindow.attr("data-type") == "hdfs-file")
+                    {
+                        app.checkHdfsFolder($(".hdfs-path-final").val(),callback);
+                    }
+                    else callback();
+                }
+                else
+                {
+                    callback();
+                }
             },
             cancelSetData: function () {
                 var $cmpWindow = $(this).closest('.cmp-window'),
